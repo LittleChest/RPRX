@@ -45,7 +45,7 @@
         "wsSettings": {
           "acceptProxyProtocol": false,
           "path": "/hi-proxy/always-online/websocket",
-          "host": "ohio.hi-proxy.896644.xyz",
+          "host": "ohio.hi-proxy.little.cn.eu.org",
           "heartbeatPeriod": 0
         },
         "sockopt": {
