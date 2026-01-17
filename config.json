@@ -1,0 +1,104 @@
+{
+  "version": {
+    "min": "25.8.3",
+    "max": ""
+  },
+  "log": {
+    "loglevel": "none",
+    "dnsLog": false,
+    "maskAddress": ""
+  },
+  "dns": {
+    "servers": [
+      "8.8.8.8",
+      "8.8.4.4",
+      "tcp+local://8.8.8.8:53",
+      "tcp+local://8.8.4.4:53"
+    ],
+    "queryStrategy": "UseIP",
+    "disableCache": false,
+    "disableFallback": true,
+    "useSystemHosts": false
+  },
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "port": 10000,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "58830853-38ea-5785-8a62-42df6da749dd"
+          },
+          {
+            "id": "8ed983c2-52f4-5ceb-8d4a-f7ccfb4555ec"
+          },
+          {
+            "id": "c3ed32e0-fb90-5de0-8f79-8b86dbefaab1"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "none",
+        "wsSettings": {
+          "acceptProxyProtocol": false,
+          "path": "/hi-proxy/always-online/websocket",
+          "host": "ohio.hi-proxy.896644.xyz",
+          "heartbeatPeriod": 0
+        },
+        "sockopt": {
+          "mark": 0,
+          "tcpFastOpen": 0,
+          "tproxy": "off",
+          "domainStrategy": "UseIPv4v6",
+          "acceptProxyProtocol": false
+        }
+      },
+      "tag": "ws",
+      "sniffing": {
+        "enabled": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4",
+        "proxyProtocol": 0
+      }
+    },
+    {
+      "protocol": "wireguard",
+      "settings": {
+        "secretKey": "gJQ/2XT9+35q6ZYrCJAvq/PUb5JYkcxF/kMvhc96Wks=",
+        "address": [
+          "172.16.0.2/32",
+          "2606:4700:110:8a06:1658:db0e:8bb5:37fe/128"
+        ],
+        "peers": [
+          {
+            "endpoint": "162.159.192.1:2408",
+            "publicKey": "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo="
+          }
+        ],
+        "noKernelTun": false,
+        "mtu": 1440,
+        "domainStrategy": "ForceIPv6v4"
+      },
+      "tag": "warp"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "ip": ["::/0"],
+        "outboundTag": "warp"
+      }
+    ]
+  }
+}
